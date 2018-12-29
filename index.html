@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +25,7 @@
     #container.show {
       background: linear-gradient(200deg,#a0cfe4,#e8c37e);
     }
-  </style>
+  </style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
   
@@ -33,7 +33,7 @@
 </head>
 </html>
 <body>
-  <div id="container" q-class="show:isCtnShow">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
@@ -174,7 +174,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="logistic回归"><a href="#logistic回归" class="headerlink" title="logistic回归"></a>logistic回归</h2><h3 id="知识补充："><a href="#知识补充：" class="headerlink" title="知识补充："></a>知识补充：</h3><h4 id="1-假设函数（Hypothesis-function）"><a href="#1-假设函数（Hypothesis-function）" class="headerlink" title="1.假设函数（Hypothesis function）"></a><strong>1.假设函数（Hypothesis function）</strong></h4><p>首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）：</p>
+        <h3 id="知识补充："><a href="#知识补充：" class="headerlink" title="知识补充："></a>知识补充：</h3><h4 id="1-假设函数（Hypothesis-function）"><a href="#1-假设函数（Hypothesis-function）" class="headerlink" title="1.假设函数（Hypothesis function）"></a><strong>1.假设函数（Hypothesis function）</strong></h4><p>首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）：</p>
 <p>$$<br>g(z)= \frac{1}{1+e^{-z}}<br>$$<br>Sigmoid函数曲线如下：</p>
 <p><img src="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/3.png" alt="Sigmoid"></p>
 <p>从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性对于解决二分类问题十分重要</p>
@@ -536,11 +536,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
+                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
               </li>
             
             <div class="clearfix"></div>
@@ -684,6 +684,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     </div>
 
 </div>
-  </div>
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 </html>

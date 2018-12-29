@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://love-sg.me">
   <title>Logistic Regression Basic | SG&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="logistic回归知识补充：1.假设函数（Hypothesis function）首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）： $$g(z)= \frac{1}{1+e^{-z}}$$Sigmoid函数曲线如下：  从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性">
+  <meta name="description" content="知识补充：1.假设函数（Hypothesis function）首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）： $$g(z)= \frac{1}{1+e^{-z}}$$Sigmoid函数曲线如下：  从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性对于解决二分类问题十">
 <meta name="keywords" content="Machine Learning Basic">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Logistic Regression Basic">
 <meta property="og:url" content="http://love-sg.me/2018/12/29/Logistic-Regression-Basic/index.html">
 <meta property="og:site_name" content="SG&#39;s Blog">
-<meta property="og:description" content="logistic回归知识补充：1.假设函数（Hypothesis function）首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）： $$g(z)= \frac{1}{1+e^{-z}}$$Sigmoid函数曲线如下：  从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性">
+<meta property="og:description" content="知识补充：1.假设函数（Hypothesis function）首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）： $$g(z)= \frac{1}{1+e^{-z}}$$Sigmoid函数曲线如下：  从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性对于解决二分类问题十">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/3.png">
 <meta property="og:image" content="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/2.png">
 <meta property="og:image" content="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/1.png">
 <meta property="og:image" content="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/4.svg">
 <meta property="og:image" content="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/5.svg">
-<meta property="og:updated_time" content="2018-12-29T16:04:43.231Z">
+<meta property="og:updated_time" content="2018-12-29T16:37:16.488Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logistic Regression Basic">
-<meta name="twitter:description" content="logistic回归知识补充：1.假设函数（Hypothesis function）首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）： $$g(z)= \frac{1}{1+e^{-z}}$$Sigmoid函数曲线如下：  从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性">
+<meta name="twitter:description" content="知识补充：1.假设函数（Hypothesis function）首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）： $$g(z)= \frac{1}{1+e^{-z}}$$Sigmoid函数曲线如下：  从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性对于解决二分类问题十">
 <meta name="twitter:image" content="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/3.png">
   
   
@@ -36,7 +36,7 @@
     #container.show {
       background: linear-gradient(200deg,#a0cfe4,#e8c37e);
     }
-  </style>
+  </style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
   
@@ -44,7 +44,7 @@
 </head>
 </html>
 <body>
-  <div id="container" q-class="show:isCtnShow">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
@@ -183,7 +183,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="logistic回归"><a href="#logistic回归" class="headerlink" title="logistic回归"></a>logistic回归</h2><h3 id="知识补充："><a href="#知识补充：" class="headerlink" title="知识补充："></a>知识补充：</h3><h4 id="1-假设函数（Hypothesis-function）"><a href="#1-假设函数（Hypothesis-function）" class="headerlink" title="1.假设函数（Hypothesis function）"></a><strong>1.假设函数（Hypothesis function）</strong></h4><p>首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）：</p>
+        <h3 id="知识补充："><a href="#知识补充：" class="headerlink" title="知识补充："></a>知识补充：</h3><h4 id="1-假设函数（Hypothesis-function）"><a href="#1-假设函数（Hypothesis-function）" class="headerlink" title="1.假设函数（Hypothesis function）"></a><strong>1.假设函数（Hypothesis function）</strong></h4><p>首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）：</p>
 <p>$$<br>g(z)= \frac{1}{1+e^{-z}}<br>$$<br>Sigmoid函数曲线如下：</p>
 <p><img src="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/3.png" alt="Sigmoid"></p>
 <p>从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性对于解决二分类问题十分重要</p>
@@ -360,7 +360,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#logistic回归"><span class="toc-number">1.</span> <span class="toc-text">logistic回归</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#知识补充："><span class="toc-number">1.1.</span> <span class="toc-text">知识补充：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-假设函数（Hypothesis-function）"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.假设函数（Hypothesis function）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-决策边界（Decision-Boundary）"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.决策边界（Decision Boundary）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-代价函数（Cost-Function）"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.代价函数（Cost Function）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理过程"><span class="toc-number">1.2.</span> <span class="toc-text">处理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Step1-数据"><span class="toc-number">1.2.1.</span> <span class="toc-text">Step1:数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step2-构造线性函数"><span class="toc-number">1.2.2.</span> <span class="toc-text">Step2:构造线性函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step3-求cost"><span class="toc-number">1.2.3.</span> <span class="toc-text">step3:求cost</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step4-梯度下降"><span class="toc-number">1.2.4.</span> <span class="toc-text">step4:梯度下降</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step5-带入数据检测得到的h-x"><span class="toc-number">1.2.5.</span> <span class="toc-text">step5:带入数据检测得到的h(x)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些更有价值的操作："><span class="toc-number">1.3.</span> <span class="toc-text">一些更有价值的操作：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在机器人评估中的应用："><span class="toc-number">1.4.</span> <span class="toc-text">在机器人评估中的应用：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-数据"><span class="toc-number">1.4.1.</span> <span class="toc-text">1.数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-使用numpy编写脚本"><span class="toc-number">1.4.2.</span> <span class="toc-text">2.使用numpy编写脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-数据处理后输入，获得输出"><span class="toc-number">1.4.3.</span> <span class="toc-text">3.数据处理后输入，获得输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-获得的一组输出-θ-即为所需值"><span class="toc-number">1.4.4.</span> <span class="toc-text">4.获得的一组输出 _θ_ 即为所需值</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#知识补充："><span class="toc-number">1.</span> <span class="toc-text">知识补充：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-假设函数（Hypothesis-function）"><span class="toc-number">1.1.</span> <span class="toc-text">1.假设函数（Hypothesis function）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-决策边界（Decision-Boundary）"><span class="toc-number">1.2.</span> <span class="toc-text">2.决策边界（Decision Boundary）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-代价函数（Cost-Function）"><span class="toc-number">1.3.</span> <span class="toc-text">3.代价函数（Cost Function）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理过程"><span class="toc-number">2.</span> <span class="toc-text">处理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Step1-数据"><span class="toc-number">2.1.</span> <span class="toc-text">Step1:数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step2-构造线性函数"><span class="toc-number">2.2.</span> <span class="toc-text">Step2:构造线性函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step3-求cost"><span class="toc-number">2.3.</span> <span class="toc-text">step3:求cost</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step4-梯度下降"><span class="toc-number">2.4.</span> <span class="toc-text">step4:梯度下降</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step5-带入数据检测得到的h-x"><span class="toc-number">2.5.</span> <span class="toc-text">step5:带入数据检测得到的h(x)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些更有价值的操作："><span class="toc-number">3.</span> <span class="toc-text">一些更有价值的操作：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在机器人评估中的应用："><span class="toc-number">4.</span> <span class="toc-text">在机器人评估中的应用：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-数据"><span class="toc-number">4.1.</span> <span class="toc-text">1.数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-使用numpy编写脚本"><span class="toc-number">4.2.</span> <span class="toc-text">2.使用numpy编写脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-数据处理后输入，获得输出"><span class="toc-number">4.3.</span> <span class="toc-text">3.数据处理后输入，获得输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-获得的一组输出-θ-即为所需值"><span class="toc-number">4.4.</span> <span class="toc-text">4.获得的一组输出 _θ_ 即为所需值</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -499,11 +499,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
+                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
               </li>
             
             <div class="clearfix"></div>
@@ -647,6 +647,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     </div>
 
 </div>
-  </div>
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 </html>
