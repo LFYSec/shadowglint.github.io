@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/4.svg">
 <meta property="og:image" content="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/6.svg">
 <meta property="og:image" content="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/5.svg">
-<meta property="og:updated_time" content="2018-12-29T17:06:26.132Z">
+<meta property="og:updated_time" content="2019-01-04T09:51:14.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logistic Regression Basic">
 <meta name="twitter:description" content="知识补充：1.假设函数（Hypothesis function）首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）： $$g(z)= \frac{1}{1+e^{-z}}$$Sigmoid函数曲线如下：  从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性对于解决二分类">
@@ -192,7 +192,7 @@
 <p>接下来将该假设函数与逻辑回归结合：</p>
 <p>$$<br>h_\theta(x) = g(\theta^T x), g(z)= \frac{1}{1+e^{-z}}<br>$$<br>其中 <strong><em>x</em></strong> 是我们的输入，向量 <strong><em>θ</em></strong>  为我们要求取的参数。</p>
 <p>接下来的逻辑回归要做的就是：求出一组最好的 <strong><em>θ</em></strong>  ,使得该函数的输出<strong>P</strong>的正确率最满足实际情况。</p>
-<p>$$<br>P(y=1|x;\theta) =g(\theta^Tx)= \frac{1}{1+e^{-\theta^Tx}}<br>$$<br>这个函数的意思就是在给定 <strong><em>x</em></strong>  和 <strong><em>θ</em></strong>  的条件下  <strong><em>y=1</em></strong>   的概率。</p>
+<p>$$<br>P(y=1|x;\theta) =g(\theta^Tx)= \frac{1}{1+e^{-\theta^Tx}}<br>$$<br>这个函数的意思就是在给定 <strong><em>x</em></strong>  和 <strong><em>θ</em></strong>  的条件下  <strong><em>y=1</em></strong>   的概率。<br><a id="more"></a></p>
 <h4 id="2-决策边界（Decision-Boundary）"><a href="#2-决策边界（Decision-Boundary）" class="headerlink" title="2.决策边界（Decision Boundary）"></a><strong>2.决策边界（Decision Boundary）</strong></h4><p>决策边界，也称为决策面，是用于在N维空间，将不同类别样本分开的平面或曲面。<br><strong>决策边界其实就是一个方程</strong>，在逻辑回归中，决策边界为由 $\theta^Tx=0$ 定义的分界。</p>
 <p>其中，<strong>一次方程</strong>得到的为<strong>线性决策边界</strong>，<strong>高次方程</strong>得到的是<strong>非线性决策边界</strong>。</p>
 <h4 id="3-代价函数（Cost-Function）"><a href="#3-代价函数（Cost-Function）" class="headerlink" title="3.代价函数（Cost Function）"></a><strong>3.代价函数（Cost Function）</strong></h4><p>概况来讲，任何能够衡量模型预测出来的值 <strong><em>h(x)</em></strong> 与真实值 <strong><em>y</em></strong> 之间的差异的函数都可以叫做代价函数 $C(\theta)$。例如，残差平方和就是最小二乘法的cost。<br>如果有多个样本，则可以将所有代价函数的取值求均值，记做 $J(\theta)$。梯度下降的目的也就是求一组 <strong><em>θ</em></strong>  使得 $J(\theta)$最小。</p>
@@ -529,11 +529,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
               </li>
              
               <li class="article-tag-list-item">

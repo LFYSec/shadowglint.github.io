@@ -261,41 +261,14 @@
 <p>接下来将该假设函数与逻辑回归结合：</p>
 <p>$$<br>h_\theta(x) = g(\theta^T x), g(z)= \frac{1}{1+e^{-z}}<br>$$<br>其中 <strong><em>x</em></strong> 是我们的输入，向量 <strong><em>θ</em></strong>  为我们要求取的参数。</p>
 <p>接下来的逻辑回归要做的就是：求出一组最好的 <strong><em>θ</em></strong>  ,使得该函数的输出<strong>P</strong>的正确率最满足实际情况。</p>
-<p>$$<br>P(y=1|x;\theta) =g(\theta^Tx)= \frac{1}{1+e^{-\theta^Tx}}<br>$$<br>这个函数的意思就是在给定 <strong><em>x</em></strong>  和 <strong><em>θ</em></strong>  的条件下  <strong><em>y=1</em></strong>   的概率。</p>
-<h4 id="2-决策边界（Decision-Boundary）"><a href="#2-决策边界（Decision-Boundary）" class="headerlink" title="2.决策边界（Decision Boundary）"></a><strong>2.决策边界（Decision Boundary）</strong></h4><p>决策边界，也称为决策面，是用于在N维空间，将不同类别样本分开的平面或曲面。<br><strong>决策边界其实就是一个方程</strong>，在逻辑回归中，决策边界为由 $\theta^Tx=0$ 定义的分界。</p>
-<p>其中，<strong>一次方程</strong>得到的为<strong>线性决策边界</strong>，<strong>高次方程</strong>得到的是<strong>非线性决策边界</strong>。</p>
-<h4 id="3-代价函数（Cost-Function）"><a href="#3-代价函数（Cost-Function）" class="headerlink" title="3.代价函数（Cost Function）"></a><strong>3.代价函数（Cost Function）</strong></h4><p>概况来讲，任何能够衡量模型预测出来的值 <strong><em>h(x)</em></strong> 与真实值 <strong><em>y</em></strong> 之间的差异的函数都可以叫做代价函数 $C(\theta)$。例如，残差平方和就是最小二乘法的cost。<br>如果有多个样本，则可以将所有代价函数的取值求均值，记做 $J(\theta)$。梯度下降的目的也就是求一组 <strong><em>θ</em></strong>  使得 $J(\theta)$最小。</p>
-<hr>
-<h2 id="处理过程"><a href="#处理过程" class="headerlink" title="处理过程"></a>处理过程</h2><h4 id="Step1-数据"><a href="#Step1-数据" class="headerlink" title="Step1:数据"></a><strong>Step1:数据</strong></h4><p>选定一组数据，其中X1,X2,X3..Xn为自变量，对应输出0或1。即通过一个合理的函数，对一组输入变量有一个合理预判1或0。</p>
-<h4 id="Step2-构造线性函数"><a href="#Step2-构造线性函数" class="headerlink" title="Step2:构造线性函数"></a><strong>Step2:构造线性函数</strong></h4><p>构造函数 <strong><em>h(x)</em></strong> 表示线性预测函数,先初始化线性函数参数 <strong><em>θ</em></strong>  为<strong>1</strong>，即：<strong><em>h(x) = θ1X1+θ2X2+…+θnXn = X1+X2+…+Xn</em></strong></p>
-<h4 id="step3-求cost"><a href="#step3-求cost" class="headerlink" title="step3:求cost"></a><strong>step3:求cost</strong></h4><p>构造一个cost函数，表示预测的输出 <strong><em>h(x)</em></strong> 与训练数据类别 <strong><em>y</em></strong> (y的值为0或1)之间的偏差。</p>
-<p>$$<br>C(\theta)={y log h_\theta(x) + (1-y) \log (1-h_\theta(x)})]<br>$$<br>cost有一个很好的性质：如果 <strong><em>hθ(x) -&gt; 1</em></strong> ，则 <strong><em>cost -&gt; 0</em></strong> ，此时预测的值和真实的值完全相等，代价本该为0；而如果判断 <strong><em>hθ(x) -&gt; 0</em></strong>  ，则 <strong><em>cost -&gt; ∞</em></strong>  ，这很好地惩罚了最后的结果。因此可以此cost合理。</p>
-<p><img src="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/2.png" alt=""></p>
-<p>将cost求和或者求平均，记为 <strong><em>J(θ)</em></strong> 函数，表示所有训练数据预测值与实际类别的偏差。</p>
-<h4 id="step4-梯度下降"><a href="#step4-梯度下降" class="headerlink" title="step4:梯度下降"></a><strong>step4:梯度下降</strong></h4><p>接下来通过梯度下降，调整参数 <strong><em>θ</em></strong>  使得代价函数 <strong><em>J(θ)</em></strong> 取得最小值。<br>$$<br>J(\theta) = -\frac{ 1 }{ m }[\sum_{ i=1 }^{ m } ({y^{(i)} \log h_\theta(x^{(i)}) + (1-y^{(i)}) \log (1-h_\theta(x^{(i)})})]<br>$$<br>梯度下降中的梯度指的是代价函数对各个参数的偏导数，偏导数的方向决定了在学习过程中参数下降的方向，学习率（通常用α表示）决定了每步变化的步长。循环迭代，求导相减即可得到最小的 <strong><em>J(θ)</em></strong><br>此处的m为数据总组数，j为各个$\theta$。在numpy中，通常x为行向量，$\theta$为列向量。最后的$x_j$为列向量。</p>
-<p>$$<br>\theta_j = \theta_j - \alpha (\frac {\partial}{\partial \theta_j})J(\theta)=\theta_j - \alpha (\frac{1}{m})\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}<br>$$<br>循环迭代最终输出的是一组使cost最小的 <strong><em>θ</em></strong> 。使 <strong><em>h(x) = 0</em></strong> 得到的决策分界，即为输出0与1的预测分界。</p>
-<p><img src="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/1.png" alt=""></p>
-<h4 id="step5-带入数据检测得到的h-x"><a href="#step5-带入数据检测得到的h-x" class="headerlink" title="step5:带入数据检测得到的h(x)"></a><strong>step5:带入数据检测得到的h(x)</strong></h4><p>将一组测试向量 <strong><em>x</em></strong> 带入关于线性函数的sigmoid函数，输出的值即为 <strong><em>y=1</em></strong> 的概率。</p>
-<hr>
-<h2 id="一些更有价值的操作："><a href="#一些更有价值的操作：" class="headerlink" title="一些更有价值的操作："></a><strong>一些更有价值的操作：</strong></h2><h4 id="1-正则化"><a href="#1-正则化" class="headerlink" title="1.正则化"></a>1.正则化</h4><p>用于处理一些过拟合情况。<br>过拟合时，如果去掉一些特征，但这些特征包含了一些重要信息不能去掉时，通常考虑加一个正则项。</p>
-<p>$$<br>J(\theta) = -\frac{ 1 }{ m }[\sum_{ i=1 }^{ m } ({y^{(i)} \log h_\theta(x^{(i)}) + (1-y^{(i)}) \log (1-h_\theta(x^{(i)})})]+λ\sum_{ j=1 }^{ m } ({\theta_j}^{2})<br>$$<br>注意最后出现的：$λ\sum_{ j=1 }^{ m } ({\theta_j}^{2})$ 即正则项，它的存在意味着我们在优化时，不仅仅想让 <strong><em>J(θ)</em></strong> 尽可能小，同时也想保证 <strong><em>θ</em></strong> 也尽可能小,由此来减少过拟合。下面的图盗自网上，为取不同 <strong><em>λ</em></strong> 时训练后的决策边界：</p>
-<p><img src="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/4.svg" alt=""></p>
-<p>可以看到，随着 λλ 的增加，决策边界越来越平滑，但同时决策边界的准确性下降了。这是因为 λλ 过大时，优化 J(θ)J(θ) 的主要目标变成了优化正则项而不是损失函数。</p>
-<h4 id="2-偏置"><a href="#2-偏置" class="headerlink" title="2.偏置"></a>2.偏置</h4><p>即为手工加上偏置项 <code>1</code> ，例如两维样本 [x1,x2][x1,x2] 就需要扩充成 [1,x1,x2][1,x1,x2]，这个 <code>1</code> 就是所谓的偏置项。这样训练出来的 θθ 就会比维度多一。这多的一维的作用是让拟合的直线可以不经过原点，即多了ax+b中的b项，从而可以表示任意直线。</p>
-<p><img src="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/6.svg" alt=""></p>
-<h4 id="3-特征缩放"><a href="#3-特征缩放" class="headerlink" title="3.特征缩放"></a>3.特征缩放</h4><p>经常的，数据的各个特征的尺度不同，而如果差异很大，则会影响训练模型的速度。因此在训练前我们常常需要把各个特征缩放到同一尺度上。我的理解，这步类似层次分析法中的归一化，用来奖不用尺度的变量对结果的影响尺度变得相近，不同的是这里是为了提升速度。下图是用梯度下降法训练上节数据的学习曲线，可以看到差别相当明显。</p>
-<p><img src="http://pkhzw7gpb.bkt.clouddn.com/image/Logistic%20Regression/5.svg" alt=""></p>
-<p>最终流程大致如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">初始化线性函数参数为1</span><br><span class="line">构造关于线性函数的sigmoid函数</span><br><span class="line">重复循环i次</span><br><span class="line">	计算数据集梯度</span><br><span class="line">	更新线性函数参数</span><br><span class="line">确定最终的sigmoid函数</span><br><span class="line">输入训练（测试）数据集</span><br><span class="line">运用最终sigmoid函数求解分类</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h3 id="在机器人评估中的应用："><a href="#在机器人评估中的应用：" class="headerlink" title="在机器人评估中的应用："></a>在机器人评估中的应用：</h3><p>也许逻辑回归可以做为新的评估方法，因为它的本质用途是用于解决二分类（0 or 1）问题,它用于估计某种事物的可能性。比如某用户购买某商品的可能性，某病人患有某种疾病的可能性，以及某广告被用户点击的可能性等。它通过判断决定因素与结果（比如说这个队伍很强）的相关度来得出可能性。如果评估中用来判断决定因素与队伍强弱的关系，那么就可以判别出这个队伍的实际水平。</p>
-<h4 id="1-数据"><a href="#1-数据" class="headerlink" title="1.数据"></a><strong>1.数据</strong></h4><p>所需数据如下：<br>(1).输入变量为一场比赛的控球率、射门成功率、推进效率、防守成功率。比赛的比分差大于某个值，这y=1，否则y=0。<br>(2).包含以上所需值的足够量的场次数据，或者每份为10分钟，需足够份数。</p>
-<h4 id="2-使用numpy编写脚本"><a href="#2-使用numpy编写脚本" class="headerlink" title="2.使用numpy编写脚本"></a><strong>2.使用numpy编写脚本</strong></h4><h4 id="3-数据处理后输入，获得输出"><a href="#3-数据处理后输入，获得输出" class="headerlink" title="3.数据处理后输入，获得输出"></a><strong>3.数据处理后输入，获得输出</strong></h4><h4 id="4-获得的一组输出-θ-即为所需值"><a href="#4-获得的一组输出-θ-即为所需值" class="headerlink" title="4.获得的一组输出 *θ* 即为所需值"></a><strong>4.获得的一组输出 *</strong>θ<strong>* 即为所需值</strong></h4><p><a href="https://github.com/ShadowGlint/ML-Basic-Code/blob/master/Logistic%20Regression.py" target="_blank" rel="noopener">代码</a></p>
-<p><strong>参考链接：</strong><br><a href="https://zhuanlan.zhihu.com/p/28408516" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/28408516</a><br><a href="https://lotabout.me/2018/Logistic-Regression-Notes/" target="_blank" rel="noopener">https://lotabout.me/2018/Logistic-Regression-Notes/</a></p>
-
+<p>$$<br>P(y=1|x;\theta) =g(\theta^Tx)= \frac{1}{1+e^{-\theta^Tx}}<br>$$<br>这个函数的意思就是在给定 <strong><em>x</em></strong>  和 <strong><em>θ</em></strong>  的条件下  <strong><em>y=1</em></strong>   的概率。<br>
+        
+          <a class="article-more-a" href="/2018/12/29/Logistic-Regression-Basic/#more">more >></a>
+        
       
 
       
-    </div>
+    </p></div>
     <div class="article-info article-info-index">
       
       
@@ -369,23 +342,14 @@
 <h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><p><strong>1.时间：1月15–2月25</strong></p>
 <p><strong>2.任务范围：前端为主</strong></p>
 <p><strong>3.任务涉及内容：js&amp;jquery基础、node、vue，angularjs可选</strong></p>
-<p><strong>4.学习笔记：本地写markdown或者更新到在线文档，多交流进度知识点等</strong></p>
-<h2 id="具体如下"><a href="#具体如下" class="headerlink" title="具体如下"></a>具体如下</h2><h4 id="1-首先复习是js和jquery基础，计划时间是5-7天，1月15-1月20"><a href="#1-首先复习是js和jquery基础，计划时间是5-7天，1月15-1月20" class="headerlink" title="1. 首先复习是js和jquery基础，计划时间是5-7天，1月15-1月20"></a><strong>1. 首先复习是js和jquery基础，计划时间是5-7天，1月15-1月20</strong></h4><p>学到什么程度呢，给一篇文章：<code>https://zhuanlan.zhihu.com/p/25602482</code></p>
-<p><strong>资料：</strong>（资料部分只是顺手一查比较出名的，学习过程中遇到好的文章一定记得加上！）<br>(1). <a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000" target="_blank" rel="noopener">廖雪峰，先跳过node等部分 </a><br>(2). <a href="https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basic" target="_blank" rel="noopener">MDN</a><br>(3). 菜鸟</p>
-<p><strong>过程中：</strong><br>教程中有的代码要跟着敲一遍，再注意看一下基本的跨域操作等开发常用技能，基本语法各种语言都类似看一下带过就行。然后有时间精力去看一下xss平台中各模块的代码以及常用一些操作payload，加深一下安全中js的运用理解。</p>
-<p><strong>js基本语法是框架等一切的基础，就好比原生php于php框架，所以给7天，基础一定打牢！学习后期也要定时多看原生js</strong></p>
-<h4 id="2-纠结了一下先学vue还是node，最终铁心先vue吧-毕竟前端太弱了，先好好弄弄前端-2333"><a href="#2-纠结了一下先学vue还是node，最终铁心先vue吧-毕竟前端太弱了，先好好弄弄前端-2333" class="headerlink" title="2. 纠结了一下先学vue还是node，最终铁心先vue吧 毕竟前端太弱了，先好好弄弄前端 2333"></a><strong>2. 纠结了一下先学vue还是node，最终铁心先vue吧 毕竟前端太弱了，先好好弄弄前端 2333</strong></h4><p>时间 1月21-2月4，共15天</p>
-<p><strong>资料：</strong><br>(1). <a href="http://www.runoob.com/vue2/vue-tutorial.html" target="_blank" rel="noopener">菜鸟</a><br>(2). <a href="https://cn.vuejs.org/v2/guide/index.html" target="_blank" rel="noopener">文档</a><br>(3). <a href="https://github.com/liangxiaojuan/vue-todos" target="_blank" rel="noopener">不错的小实例</a></p>
-<p><strong>注意:</strong> 我的理解，学vue并不是为了前端开发，而是vue资料多，而且上手容易，想快速提高前端知识，毕竟我是个安全工程师，而且是菜的一批的那种，所以vue只要会用，能基本看懂就行。学vue最主要的原因还是理解下前端框架的思路和能更好的熟悉前端的一些问题</p>
-<h4 id="3-node，后端不多说，越熟越好"><a href="#3-node，后端不多说，越熟越好" class="headerlink" title="3. node，后端不多说，越熟越好"></a><strong>3. node，后端不多说，越熟越好</strong></h4><p>时间 2月5-2月19，共15天 剩下的时间自己补补落下的或者其他的事</p>
-<p><code>https://juejin.im/entry/5987aaa6f265da3e3678c1a3</code></p>
-<p><strong>资料：</strong><br>(1). <a href="http://www.runoob.com/nodejs/nodejs-tutorial.html" target="_blank" rel="noopener">菜鸟</a><br>(2). <a href="https://www.nodebeginner.org/index-zh-cn.html" target="_blank" rel="noopener">node入门</a><br>(3). 廖雪峰也稍微提及了node，可以看下<br>(4). <a href="https://nodejs.org/zh-cn/docs/" target="_blank" rel="noopener">文档</a></p>
-<p><strong>node算是后端了，所以要好好看，熟悉写的cms的整体架构等，可能不急于写熟，但一定要能读能审，其他的慢慢来</strong></p>
-
+<p><strong>4.学习笔记：本地写markdown或者更新到在线文档，多交流进度知识点等</strong><br>
+        
+          <a class="article-more-a" href="/2018/12/29/寒假计划/#more">more >></a>
+        
       
 
       
-    </div>
+    </p></div>
     <div class="article-info article-info-index">
       
       
@@ -635,11 +599,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
               </li>
              
               <li class="article-tag-list-item">
