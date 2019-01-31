@@ -177,7 +177,7 @@
         <p>kun神推荐了一个不错的tp题，正巧最近看了一段时间tp，就去看了下。</p>
 <p>题目地址：<a href="https://github.com/wonderkun/CTF_web/tree/master/web400-13" target="_blank" rel="noopener">kun神CTF_WEB-400-13</a></p>
 <h3 id="STEP1-任意文件删除"><a href="#STEP1-任意文件删除" class="headerlink" title="STEP1 任意文件删除"></a>STEP1 任意文件删除</h3><p><strong><a href="http://www.zip" target="_blank" rel="noopener">www.zip</a></strong></p>
-<p>读了一下，发现逻辑很简单，也没啥可能出漏洞的地方，题目要求是读<code>etc/passwd</code>，所以大致有以下几种想法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 能否反序列化来任意文件读取或getshell</span><br><span class="line">2. mysql的地址是可控的，能否删除lock重装来连接远程数据库任意文件读</span><br></pre></td></tr></table></figure></p>
+<p>读了一下，发现逻辑很简单，也没啥可能出漏洞的地方，题目要求是读<code>/etc/flag</code>，所以大致有以下几种想法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 能否反序列化来任意文件读取或getshell</span><br><span class="line">2. mysql的地址是可控的，能否删除lock重装来连接远程数据库任意文件读</span><br></pre></td></tr></table></figure></p>
 <p>先来尝试下第一个想法，看看能不能找到TP中的魔术方法中能进行敏感操作的类。</p>
 <p><code>grep -l &#39;c&#39; $(grep -l &#39;b&#39; $(grep -Rl &#39;a&#39; 2&gt;/dev/null))</code> 这样能方便的找某个文件中有某几个关键字</p>
 <p><img src="http://pltffa668.bkt.clouddn.com/image/TP/1.png" alt=""></p>
@@ -683,11 +683,7 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -695,11 +691,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
             
             <div class="clearfix"></div>

@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://love-sg.me">
   <title>记一道有意思的TP题 | SG&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="kun神推荐了一个不错的tp题，正巧最近看了一段时间tp，就去看了下。 题目地址：kun神CTF_WEB-400-13 STEP1 任意文件删除www.zip 读了一下，发现逻辑很简单，也没啥可能出漏洞的地方，题目要求是读etc/passwd，所以大致有以下几种想法：121. 能否反序列化来任意文件读取或getshell2. mysql的地址是可控的，能否删除lock重装来连接远程数据库任意文件读">
+  <meta name="description" content="kun神推荐了一个不错的tp题，正巧最近看了一段时间tp，就去看了下。 题目地址：kun神CTF_WEB-400-13 STEP1 任意文件删除www.zip 读了一下，发现逻辑很简单，也没啥可能出漏洞的地方，题目要求是读/etc/flag，所以大致有以下几种想法：121. 能否反序列化来任意文件读取或getshell2. mysql的地址是可控的，能否删除lock重装来连接远程数据库任意文件读">
 <meta name="keywords" content="CTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一道有意思的TP题">
 <meta property="og:url" content="http://love-sg.me/2019/01/31/记一道有意思的TP题/index.html">
 <meta property="og:site_name" content="SG&#39;s Blog">
-<meta property="og:description" content="kun神推荐了一个不错的tp题，正巧最近看了一段时间tp，就去看了下。 题目地址：kun神CTF_WEB-400-13 STEP1 任意文件删除www.zip 读了一下，发现逻辑很简单，也没啥可能出漏洞的地方，题目要求是读etc/passwd，所以大致有以下几种想法：121. 能否反序列化来任意文件读取或getshell2. mysql的地址是可控的，能否删除lock重装来连接远程数据库任意文件读">
+<meta property="og:description" content="kun神推荐了一个不错的tp题，正巧最近看了一段时间tp，就去看了下。 题目地址：kun神CTF_WEB-400-13 STEP1 任意文件删除www.zip 读了一下，发现逻辑很简单，也没啥可能出漏洞的地方，题目要求是读/etc/flag，所以大致有以下几种想法：121. 能否反序列化来任意文件读取或getshell2. mysql的地址是可控的，能否删除lock重装来连接远程数据库任意文件读">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pltffa668.bkt.clouddn.com/image/TP/1.png">
 <meta property="og:image" content="http://pltffa668.bkt.clouddn.com/image/TP/2.png">
 <meta property="og:image" content="http://pltffa668.bkt.clouddn.com/image/TP/3.png">
-<meta property="og:updated_time" content="2019-01-31T09:56:19.977Z">
+<meta property="og:updated_time" content="2019-01-31T09:59:43.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一道有意思的TP题">
-<meta name="twitter:description" content="kun神推荐了一个不错的tp题，正巧最近看了一段时间tp，就去看了下。 题目地址：kun神CTF_WEB-400-13 STEP1 任意文件删除www.zip 读了一下，发现逻辑很简单，也没啥可能出漏洞的地方，题目要求是读etc/passwd，所以大致有以下几种想法：121. 能否反序列化来任意文件读取或getshell2. mysql的地址是可控的，能否删除lock重装来连接远程数据库任意文件读">
+<meta name="twitter:description" content="kun神推荐了一个不错的tp题，正巧最近看了一段时间tp，就去看了下。 题目地址：kun神CTF_WEB-400-13 STEP1 任意文件删除www.zip 读了一下，发现逻辑很简单，也没啥可能出漏洞的地方，题目要求是读/etc/flag，所以大致有以下几种想法：121. 能否反序列化来任意文件读取或getshell2. mysql的地址是可控的，能否删除lock重装来连接远程数据库任意文件读">
 <meta name="twitter:image" content="http://pltffa668.bkt.clouddn.com/image/TP/1.png">
   
   
@@ -184,7 +184,7 @@
         <p>kun神推荐了一个不错的tp题，正巧最近看了一段时间tp，就去看了下。</p>
 <p>题目地址：<a href="https://github.com/wonderkun/CTF_web/tree/master/web400-13" target="_blank" rel="noopener">kun神CTF_WEB-400-13</a></p>
 <h3 id="STEP1-任意文件删除"><a href="#STEP1-任意文件删除" class="headerlink" title="STEP1 任意文件删除"></a>STEP1 任意文件删除</h3><p><strong><a href="http://www.zip" target="_blank" rel="noopener">www.zip</a></strong></p>
-<p>读了一下，发现逻辑很简单，也没啥可能出漏洞的地方，题目要求是读<code>etc/passwd</code>，所以大致有以下几种想法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 能否反序列化来任意文件读取或getshell</span><br><span class="line">2. mysql的地址是可控的，能否删除lock重装来连接远程数据库任意文件读</span><br></pre></td></tr></table></figure></p>
+<p>读了一下，发现逻辑很简单，也没啥可能出漏洞的地方，题目要求是读<code>/etc/flag</code>，所以大致有以下几种想法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 能否反序列化来任意文件读取或getshell</span><br><span class="line">2. mysql的地址是可控的，能否删除lock重装来连接远程数据库任意文件读</span><br></pre></td></tr></table></figure></p>
 <p>先来尝试下第一个想法，看看能不能找到TP中的魔术方法中能进行敏感操作的类。</p>
 <p><code>grep -l &#39;c&#39; $(grep -l &#39;b&#39; $(grep -Rl &#39;a&#39; 2&gt;/dev/null))</code> 这样能方便的找某个文件中有某几个关键字</p>
 <p><img src="http://pltffa668.bkt.clouddn.com/image/TP/1.png" alt=""></p>
@@ -493,11 +493,7 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -505,11 +501,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
             
             <div class="clearfix"></div>
