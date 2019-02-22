@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pnc8how9w.bkt.clouddn.com/image/TPRun/1.png">
 <meta property="og:image" content="http://pnc8how9w.bkt.clouddn.com/image/TPRun/2.png">
-<meta property="og:updated_time" content="2019-02-22T18:17:08.304Z">
+<meta property="og:updated_time" content="2019-02-22T18:19:41.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TP是如何Run起来的">
 <meta name="twitter:description" content="前言最近TP爆了三个的RCE，我也对漏洞进行了分析，跟了相应的源码。这几个洞一个是任意方法调用造成的，另一个本质是请求中filter可控，而tp的会对输入即input进行filter过滤造成的。分析洞不难，但是分析中我对TP的dispatch路由调度以及TP的整个运行过程并不是很清楚，因此就有了这篇文章。 TP版本：5.0.22 从官网Down到TP源码，首先看start.php里这一句：App:">
@@ -186,6 +186,7 @@
 <p>首先<code>$request</code>是一个<code>Request::instance()</code>，进去看一下最后就是<code>self::$instance = new static($options);</code>这个操作，也就是返回了Request类的实例。</p>
 <p>说下new static这个操作也是第一次见。。之前只见过new self()，这里贴一段代码就明白两者区别了。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">get_self</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">self</span>();</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">get_static</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">static</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">echo</span> get_class(B::get_self()); <span class="comment">// A</span></span><br><span class="line"><span class="keyword">echo</span> get_class(B::get_static()); <span class="comment">// B</span></span><br><span class="line"><span class="keyword">echo</span> get_class(A::get_static()); <span class="comment">// A</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>回到源码，接下来通过<code>self::initCommon()</code>方法把文件convention.php的配置读到了$config数组中。<br>接下来会进行模块绑定的处理，首先检查App的属性bind，是否绑定到特定模块/控制器。如果App的属性bind没有设置，则读取配置的<code>auto_bind_module</code>。如果设置了自动绑定模块，则将入口文件名绑定为模块名称。</p>
 <p>这里不重要，接着往下，调用了<code>$request-&gt;filter($config[&#39;default_filter&#39;]);</code>来将config中的过滤器绑定到request对象中。5.0.22里这个值默认是空的。</p>
 <p>跳过下面几行，到了<code>Hook::listen(&#39;app_dispatch&#39;, self::$dispatch);</code>这里，调用app_dispatch的回调函数。<br>TP中的钩子实际就是行为拓展。这里引用一下摘来的一段对行为的理解：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">行为（Behavior）是一个比较抽象的概念，你可以想象成在应用执行过程中的一个动作或者处理，在框架的执行流程中，各个位置都可以有行为产生，例如路由检测是一个行为，静态缓存是一个行为，用户权限检测也是行为，大到业务逻辑，小到浏览器检测、多语言检测等等都可以当做是一个行为，甚至说你希望给你的网站用户的第一次访问弹出Hello，world！这些都可以看成是一种行为，行为的存在让你无需改动框架和应用，而在外围通过扩展或者配置来改变或者增加一些功能。</span><br><span class="line"></span><br><span class="line">而不同的行为之间也具有位置共同性，比如，有些行为的作用位置都是在应用执行前，有些行为都是在模板输出之后，我们把这些行为发生作用的位置称之为标签（位）(tag)，当应用程序运行到这个标签的时候，就会被拦截下来，统一执行相关的行为</span><br></pre></td></tr></table></figure></p>
@@ -516,11 +517,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
               </li>
              
               <li class="article-tag-list-item">
