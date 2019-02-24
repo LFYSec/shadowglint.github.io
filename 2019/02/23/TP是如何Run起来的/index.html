@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pnc8how9w.bkt.clouddn.com/image/TPRun/1.png">
 <meta property="og:image" content="http://pnc8how9w.bkt.clouddn.com/image/TPRun/2.png">
-<meta property="og:updated_time" content="2019-02-22T18:19:41.950Z">
+<meta property="og:updated_time" content="2019-02-24T11:17:06.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TP是如何Run起来的">
 <meta name="twitter:description" content="前言最近TP爆了三个的RCE，我也对漏洞进行了分析，跟了相应的源码。这几个洞一个是任意方法调用造成的，另一个本质是请求中filter可控，而tp的会对输入即input进行filter过滤造成的。分析洞不难，但是分析中我对TP的dispatch路由调度以及TP的整个运行过程并不是很清楚，因此就有了这篇文章。 TP版本：5.0.22 从官网Down到TP源码，首先看start.php里这一句：App:">
@@ -214,7 +214,7 @@
 <p>也就是说，在Loader::controller()方法中，当new $class()的时候，会自动触发自动加载，而路由的解析过程中，只是进行了很多过程操作。而反射是在注入一个对象的过程中，可能这个对象的参数也是一个对象，这就用到了另外的一个对象，这时通过反射和自动加载实现的依赖注入就可以成功new出依赖的实例来注入到参数中，从而实现依赖注入。</p>
 <p>再写一下tp中常用的几个反射方法<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 执行函数或者闭包方法 支持参数调用</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@access</span> public</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> string|array|\Closure $function 调用的函数名</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> array                 $vars     函数参数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">invokeFunction</span><span class="params">($function, $vars = [])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $reflect = <span class="keyword">new</span> \ReflectionFunction($function);   <span class="comment">//创建$function的反射函数类</span></span><br><span class="line">    $args    = <span class="keyword">self</span>::bindParams($reflect, $vars);    <span class="comment">//绑定反射函数的参数</span></span><br><span class="line">    <span class="comment">// 记录执行信息</span></span><br><span class="line">    <span class="keyword">self</span>::$debug &amp;&amp; Log::record(<span class="string">'[ RUN ] '</span> . $reflect-&gt;__toString(), <span class="string">'info'</span>);</span><br><span class="line">    <span class="keyword">return</span> $reflect-&gt;invokeArgs($args);              <span class="comment">//使用反射函数类调用函数，并返回结果</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>还有就是依赖注入的概念也是很常用的，在很多框架中，依赖注入都是实现高级功能的基础。我理解得也不是很清晰，这里不详述。</p>
-<h3 id="未完待续。。。"><a href="#未完待续。。。" class="headerlink" title="未完待续。。。"></a>未完待续。。。</h3><p>参考资料：<br><a href="https://www.kancloud.cn/zmwtp/tp5/" target="_blank" rel="noopener">https://www.kancloud.cn/zmwtp/tp5/</a></p>
+<h3 id="核心路由调度部分还差很多，未完待续。。。"><a href="#核心路由调度部分还差很多，未完待续。。。" class="headerlink" title="核心路由调度部分还差很多，未完待续。。。"></a>核心路由调度部分还差很多，未完待续。。。</h3><p>参考资料：<br><a href="https://www.kancloud.cn/zmwtp/tp5/" target="_blank" rel="noopener">https://www.kancloud.cn/zmwtp/tp5/</a></p>
 
       
 
@@ -353,7 +353,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#未完待续。。。"><span class="toc-number">2.</span> <span class="toc-text">未完待续。。。</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#核心路由调度部分还差很多，未完待续。。。"><span class="toc-number">2.</span> <span class="toc-text">核心路由调度部分还差很多，未完待续。。。</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -509,19 +509,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
               </li>
              
               <li class="article-tag-list-item">

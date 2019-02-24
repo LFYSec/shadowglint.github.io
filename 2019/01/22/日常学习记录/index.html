@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://love-sg.me">
-  <title>Archives: 2018 | SG&#39;s Blog</title>
+  <title>日常学习记录 | SG&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="SG&#39;s Blog">
-<meta property="og:url" content="http://love-sg.me/archives/2018/index.html">
+  <meta name="description" content="零散知识点太多了，同一扔这儿 1. PHP正则今天做了一个题，被坑了。。核心代码如下：1234567891011121314151617if(isset($_POST[&quot;content&quot;]))   &amp;#123;       $username = $_SESSION[&quot;username&quot;];       $content = addslashes($_POST[&quot;content&quot;]);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日常学习记录">
+<meta property="og:url" content="http://love-sg.me/2019/01/22/日常学习记录/index.html">
 <meta property="og:site_name" content="SG&#39;s Blog">
+<meta property="og:description" content="零散知识点太多了，同一扔这儿 1. PHP正则今天做了一个题，被坑了。。核心代码如下：1234567891011121314151617if(isset($_POST[&quot;content&quot;]))   &amp;#123;       $username = $_SESSION[&quot;username&quot;];       $content = addslashes($_POST[&quot;content&quot;]);">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-24T11:16:03.625Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SG&#39;s Blog">
+<meta name="twitter:title" content="日常学习记录">
+<meta name="twitter:description" content="零散知识点太多了，同一扔这儿 1. PHP正则今天做了一个题，被坑了。。核心代码如下：1234567891011121314151617if(isset($_POST[&quot;content&quot;]))   &amp;#123;       $username = $_SESSION[&quot;username&quot;];       $content = addslashes($_POST[&quot;content&quot;]);">
   
   
     <link rel="icon" href="/favicon.png">
@@ -152,174 +156,202 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-日常学习记录" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      日常学习记录
+    </h1>
+  
+
+        
+        <a href="/2019/01/22/日常学习记录/" class="archive-article-date">
+  	<time datetime="2019-01-22T10:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>零散知识点太多了，同一扔这儿</strong></p>
+<h3 id="1-PHP正则"><a href="#1-PHP正则" class="headerlink" title="1. PHP正则"></a>1. PHP正则</h3><p>今天做了一个题，被坑了。。<br>核心代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">"content"</span>]))</span><br><span class="line">   &#123;</span><br><span class="line">       $username = $_SESSION[<span class="string">"username"</span>];</span><br><span class="line">       $content = addslashes($_POST[<span class="string">"content"</span>]);</span><br><span class="line"></span><br><span class="line">       $sql = <span class="string">"select username from red where username like '$username#%'"</span>;</span><br><span class="line">       $result = DB::query($sql);</span><br><span class="line">       $old_content = $result[<span class="number">0</span>][<span class="string">"username"</span>];</span><br><span class="line"></span><br><span class="line">       $content = preg_replace(<span class="string">"|#.*|"</span>, <span class="string">"#$content"</span>, $old_content);</span><br><span class="line">      </span><br><span class="line">       $sql = <span class="string">"update red</span></span><br><span class="line"><span class="string">               set username='$content' </span></span><br><span class="line"><span class="string">               where username like '$username#%'"</span>;</span><br><span class="line">       DB::update($sql);</span><br><span class="line">       header(<span class="string">"Location: ./index.php"</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>exp:<code>\&#39;,username=concat(0x7623,version(),user())#</code></p>
+<p>问题出在addslashes后的content上。content传入<code>\&#39;</code>，<code>addslashes</code>+<code>preg_replace</code>后content值为<code>\\&#39;</code>，而不是<code>\&#39;</code>，而如果直接<code>\$content = &quot;\&#39;&quot;</code>，同样操作后的值为<code>\&#39;</code>。如果要通过直接字符串字面量直接匹配，需要<code>\$content = &quot;\\\\\\\&#39;&quot;;</code>这样写。就好像匹配<code>&#39;\&#39;</code>需要<code>&#39;\\\\&#39;</code>一样。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢金主爸爸<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/31/msf&nmap常用基本操作/" class="archive-article-date">
-  	<time datetime="2018-12-30T16:18:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/31/msf&nmap常用基本操作/">msf&amp;nmap常用基本操作</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">工具使用</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
-          
-
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://love-sg.me/2019/01/22/日常学习记录/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/29/Logistic-Regression-Basic/" class="archive-article-date">
-  	<time datetime="2018-12-29T15:34:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-29</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/01/31/记一道有意思的TP题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          记一道有意思的TP题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/31/msf&nmap常用基本操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">msf&amp;nmap常用基本操作</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/29/Logistic-Regression-Basic/">Logistic Regression Basic</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Machine Learning Basic</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-PHP正则"><span class="toc-number">1.</span> <span class="toc-text">1. PHP正则</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/29/寒假计划/" class="archive-article-date">
-  	<time datetime="2018-12-28T17:13:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-29</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/29/寒假计划/">寒假计划</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">立志不倒的flags</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/21/lfy-s-new-blog/" class="archive-article-date">
-  	<time datetime="2018-12-21T07:43:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/21/lfy-s-new-blog/">lfy&#39;s new blog</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">碎碎念</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+<script src="https://www.wenjunjiang.win/js/gitment.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "http://love-sg.me/2019/01/22/日常学习记录/",
+  owner: 'ShadowGlint',
+  repo: 'shadowglint.github.io',
+  oauth: {
+    client_id: '7eae7b3b5dc96952d40b',
+    client_secret: 'fb727d8883c428ecaf2e266de0993460163c09fe',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+  
 
 
           </div>
@@ -348,8 +380,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -318,6 +318,72 @@
 
 
   
+    <article id="post-日常学习记录" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/22/日常学习记录/">日常学习记录</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/22/日常学习记录/" class="archive-article-date">
+  	<time datetime="2019-01-22T10:50:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>零散知识点太多了，同一扔这儿</strong></p>
+<h3 id="1-PHP正则"><a href="#1-PHP正则" class="headerlink" title="1. PHP正则"></a>1. PHP正则</h3><p>今天做了一个题，被坑了。。<br>核心代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">"content"</span>]))</span><br><span class="line">   &#123;</span><br><span class="line">       $username = $_SESSION[<span class="string">"username"</span>];</span><br><span class="line">       $content = addslashes($_POST[<span class="string">"content"</span>]);</span><br><span class="line"></span><br><span class="line">       $sql = <span class="string">"select username from red where username like '$username#%'"</span>;</span><br><span class="line">       $result = DB::query($sql);</span><br><span class="line">       $old_content = $result[<span class="number">0</span>][<span class="string">"username"</span>];</span><br><span class="line"></span><br><span class="line">       $content = preg_replace(<span class="string">"|#.*|"</span>, <span class="string">"#$content"</span>, $old_content);</span><br><span class="line">      </span><br><span class="line">       $sql = <span class="string">"update red</span></span><br><span class="line"><span class="string">               set username='$content' </span></span><br><span class="line"><span class="string">               where username like '$username#%'"</span>;</span><br><span class="line">       DB::update($sql);</span><br><span class="line">       header(<span class="string">"Location: ./index.php"</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>exp:<code>\&#39;,username=concat(0x7623,version(),user())#</code></p>
+<p>问题出在addslashes后的content上。content传入<code>\&#39;</code>，<code>addslashes</code>+<code>preg_replace</code>后content值为<code>\\&#39;</code>，而不是<code>\&#39;</code>，而如果直接<code>\$content = &quot;\&#39;&quot;</code>，同样操作后的值为<code>\&#39;</code>。如果要通过直接字符串字面量直接匹配，需要<code>\$content = &quot;\\\\\\\&#39;&quot;;</code>这样写。就好像匹配<code>&#39;\&#39;</code>需要<code>&#39;\\\\&#39;</code>一样。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/22/日常学习记录/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-msf&amp;nmap常用基本操作" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -756,19 +822,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
               </li>
              
               <li class="article-tag-list-item">
