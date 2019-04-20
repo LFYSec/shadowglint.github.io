@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="SG&#39;s Blog">
 <meta property="og:description" content="net use常见套路:net use \ip\c$ pwd /user:administrator              //建立ipc$net use                                                           //查看ipc$共享copy PsExec.exe \192.168.137.133\c$              //拷">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-03T03:02:11.426Z">
+<meta property="og:updated_time" content="2019-04-20T02:52:17.720Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内网tips持续更新">
 <meta name="twitter:description" content="net use常见套路:net use \ip\c$ pwd /user:administrator              //建立ipc$net use                                                           //查看ipc$共享copy PsExec.exe \192.168.137.133\c$              //拷">
@@ -177,6 +177,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>net use常见套路:<br>net use \ip\c$ pwd /user:administrator              //建立ipc$<br>net use                                                           //查看ipc$共享<br>copy PsExec.exe \192.168.137.133\c$              //拷到C盘<br>copy PsExec.exe \192.168.137.133\admin$      //通常是C:/Windows<br>net use z: \del                                                 //删除<br>net use S: \ip\c$ pwd /user:administrator                    //映射到本地Span</p>
+<a id="more"></a>
 <p>psexec：<br>psexec.exe \ip –accepteula \域名 -u username -p password cmd.exe</p>
 <p>-c &lt;[路径]文件名&gt;:拷贝文件到远程机器并运行（注意：运行结束后文件会自动删除）<br>-d 不等待程序执行完就返回<br>比如想上传一个本地的getpass到你远程连接的服务器上去:<br>Psexec.exe \ip –u user –p pass –c c:\getpass.exe –d</p>
 <p>常见错误：<br>错误号5，拒绝访问：很可能你使用的用户不是管理员权限的，先提升权限；<br>错误号51，Windows无法找到网络路径：网络有问题；<br>错误号53，找不到网络路径：ip地址错误；目标未开机；目标lanmanserver服务未启动；目标有防火墙(端口过滤)；at的话可能未开TaskSchedule<br>错误号67，找不到网络名： 判断目标主机已禁用ADMIN$共享<br>错误号1219，提供的凭据与已存在的凭据集冲突：你已经和对方建立了一个ipc$，请删除再连；<br>错误号1326，未知的用户名或错误密码；<br>错误号1792，试图登录，但是网络登录服务没有启动：目标NetLogon服务未启动；<br>错误号2242，此用户的密码已经过期：目标有帐号策略，强制定期要求更改密码</p>
@@ -287,6 +288,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/04/20/再来一杯JAVA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          DDCTF-再来一杯JAVA复现
+        
+      </div>
+    </a>
   
   
     <a href="/2019/02/23/TP是如何Run起来的/" id="article-nav-older" class="article-nav-link-wrap">
@@ -481,11 +491,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
+                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+                <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
               </li>
              
               <li class="article-tag-list-item">
