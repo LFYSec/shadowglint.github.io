@@ -16,17 +16,17 @@
 <meta property="og:site_name" content="SG&#39;s Blog">
 <meta property="og:description" content="知识补充：1.假设函数（Hypothesis function）首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）： $$g(z)= \frac{1}{1+e^{-z}}$$Sigmoid函数曲线如下：  从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性对于解决二分类">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pnc8how9w.bkt.clouddn.com/image/Logistic%20Regression/3.png">
-<meta property="og:image" content="http://pltffa668.bkt.clouddn.comimage/Logistic%20Regression/2.png">
-<meta property="og:image" content="http://pnc8how9w.bkt.clouddn.com/image/Logistic%20Regression/1.png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8400344-b2ea6e9143565516.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8400344-9bec204307d3e5e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8400344-30d385f97b1e0365.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://pnc8how9w.bkt.clouddn.com/image/Logistic%20Regression/4.svg">
 <meta property="og:image" content="http://pnc8how9w.bkt.clouddn.com/image/Logistic%20Regression/6.svg">
 <meta property="og:image" content="http://pnc8how9w.bkt.clouddn.com/image/Logistic%20Regression/5.svg">
-<meta property="og:updated_time" content="2019-02-22T17:25:35.202Z">
+<meta property="og:updated_time" content="2019-04-25T15:05:13.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logistic Regression Basic">
 <meta name="twitter:description" content="知识补充：1.假设函数（Hypothesis function）首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）： $$g(z)= \frac{1}{1+e^{-z}}$$Sigmoid函数曲线如下：  从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性对于解决二分类">
-<meta name="twitter:image" content="http://pnc8how9w.bkt.clouddn.com/image/Logistic%20Regression/3.png">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/8400344-b2ea6e9143565516.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
   
     <link rel="icon" href="/favicon.png">
@@ -187,7 +187,7 @@
         <p><br>  </p>
 <h2 id="知识补充："><a href="#知识补充：" class="headerlink" title="知识补充："></a>知识补充：</h2><h4 id="1-假设函数（Hypothesis-function）"><a href="#1-假设函数（Hypothesis-function）" class="headerlink" title="1.假设函数（Hypothesis function）"></a><strong>1.假设函数（Hypothesis function）</strong></h4><p>首先我们要先介绍一下Sigmoid函数，也称为逻辑函数（Logistic function）：</p>
 <p>$$<br>g(z)= \frac{1}{1+e^{-z}}<br>$$<br>Sigmoid函数曲线如下：</p>
-<p><img src="http://pnc8how9w.bkt.clouddn.com/image/Logistic%20Regression/3.png" alt="Sigmoid"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8400344-b2ea6e9143565516.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Sigmoid"></p>
 <p>从上图可以看到sigmoid函数是一个s形的曲线，它的取值在[0, 1]之间，在远离0的地方函数的值会很快接近0或者1。它的这个特性对于解决二分类问题十分重要</p>
 <p>接下来将该假设函数与逻辑回归结合：</p>
 <p>$$<br>h_\theta(x) = g(\theta^T x), g(z)= \frac{1}{1+e^{-z}}<br>$$<br>其中 <strong><em>x</em></strong> 是我们的输入，向量 <strong><em>θ</em></strong>  为我们要求取的参数。<br><a id="more"></a><br>接下来的逻辑回归要做的就是：求出一组最好的 <strong><em>θ</em></strong>  ,使得该函数的输出<strong>P</strong>的正确率最满足实际情况。</p>
@@ -200,11 +200,11 @@
 <h4 id="Step2-构造线性函数"><a href="#Step2-构造线性函数" class="headerlink" title="Step2:构造线性函数"></a><strong>Step2:构造线性函数</strong></h4><p>构造函数 <strong><em>h(x)</em></strong> 表示线性预测函数,先初始化线性函数参数 <strong><em>θ</em></strong>  为<strong>1</strong>，即：<strong><em>h(x) = θ1X1+θ2X2+…+θnXn = X1+X2+…+Xn</em></strong></p>
 <h4 id="step3-求cost"><a href="#step3-求cost" class="headerlink" title="step3:求cost"></a><strong>step3:求cost</strong></h4><p>构造一个cost函数，表示预测的输出 <strong><em>h(x)</em></strong> 与训练数据类别 <strong><em>y</em></strong> (y的值为0或1)之间的偏差。</p>
 <p>$$<br>C(\theta)={y log h_\theta(x) + (1-y) \log (1-h_\theta(x)})]<br>$$<br>cost有一个很好的性质：如果 <strong><em>hθ(x) -&gt; 1</em></strong> ，则 <strong><em>cost -&gt; 0</em></strong> ，此时预测的值和真实的值完全相等，代价本该为0；而如果判断 <strong><em>hθ(x) -&gt; 0</em></strong>  ，则 <strong><em>cost -&gt; ∞</em></strong>  ，这很好地惩罚了最后的结果。因此可以此cost合理。</p>
-<p><img src="http://pltffa668.bkt.clouddn.comimage/Logistic%20Regression/2.png" alt=""></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8400344-9bec204307d3e5e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>将cost求和或者求平均，记为 <strong><em>J(θ)</em></strong> 函数，表示所有训练数据预测值与实际类别的偏差。</p>
 <h4 id="step4-梯度下降"><a href="#step4-梯度下降" class="headerlink" title="step4:梯度下降"></a><strong>step4:梯度下降</strong></h4><p>接下来通过梯度下降，调整参数 <strong><em>θ</em></strong>  使得代价函数 <strong><em>J(θ)</em></strong> 取得最小值。<br>$$<br>J(\theta) = -\frac{ 1 }{ m }[\sum_{ i=1 }^{ m } ({y^{(i)} \log h_\theta(x^{(i)}) + (1-y^{(i)}) \log (1-h_\theta(x^{(i)})})]<br>$$<br>梯度下降中的梯度指的是代价函数对各个参数的偏导数，偏导数的方向决定了在学习过程中参数下降的方向，学习率（通常用α表示）决定了每步变化的步长。循环迭代，求导相减即可得到最小的 <strong><em>J(θ)</em></strong><br>此处的m为数据总组数，j为各个$\theta$。在numpy中，通常x为行向量，$\theta$为列向量。最后的$x_j$为列向量。</p>
 <p>$$<br>\theta_j = \theta_j - \alpha (\frac {\partial}{\partial \theta_j})J(\theta)=\theta_j - \alpha (\frac{1}{m})\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}<br>$$<br>循环迭代最终输出的是一组使cost最小的 <strong><em>θ</em></strong> 。使 <strong><em>h(x) = 0</em></strong> 得到的决策分界，即为输出0与1的预测分界。</p>
-<p><img src="http://pnc8how9w.bkt.clouddn.com/image/Logistic%20Regression/1.png" alt=""></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8400344-30d385f97b1e0365.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h4 id="step5-带入数据检测得到的h-x"><a href="#step5-带入数据检测得到的h-x" class="headerlink" title="step5:带入数据检测得到的h(x)"></a><strong>step5:带入数据检测得到的h(x)</strong></h4><p>将一组测试向量 <strong><em>x</em></strong> 带入关于线性函数的sigmoid函数，输出的值即为 <strong><em>y=1</em></strong> 的概率。</p>
 <hr>
 <h2 id="一些更有价值的操作："><a href="#一些更有价值的操作：" class="headerlink" title="一些更有价值的操作："></a><strong>一些更有价值的操作：</strong></h2><h4 id="1-正则化"><a href="#1-正则化" class="headerlink" title="1.正则化"></a>1.正则化</h4><p>用于处理一些过拟合情况。<br>过拟合时，如果去掉一些特征，但这些特征包含了一些重要信息不能去掉时，通常考虑加一个正则项。</p>
@@ -524,11 +524,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Machine Learning Basic</a>
+                <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -536,11 +540,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
               </li>
              
               <li class="article-tag-list-item">
