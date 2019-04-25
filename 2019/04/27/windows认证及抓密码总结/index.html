@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/artech/201101/201101242156364484.png">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8400344-d8903e445f469777.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8400344-ddf1c4962511de7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-04-25T15:07:32.479Z">
+<meta property="og:updated_time" content="2019-04-25T15:10:39.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows认证及抓密码总结">
 <meta name="twitter:description" content="1. windows的认证方式主要有哪些？windows的认证方式主要有NTLM认证、Kerberos认证两种。同时，Windows Access Token记录着某用户的SID、组ID、Session、及权限等信息，也起到了权限认证的作用。 其中，NTLM认证主要有本地认证和网络认证两种方式。本地登录时，用户的密码存储在%SystemRoot%\system32\config\sam这个文件里。">
@@ -184,7 +184,7 @@
         <h3 id="1-windows的认证方式主要有哪些？"><a href="#1-windows的认证方式主要有哪些？" class="headerlink" title="1. windows的认证方式主要有哪些？"></a>1. windows的认证方式主要有哪些？</h3><p>windows的认证方式主要有NTLM认证、Kerberos认证两种。同时，Windows Access Token记录着某用户的SID、组ID、Session、及权限等信息，也起到了权限认证的作用。</p>
 <p>其中，NTLM认证主要有本地认证和网络认证两种方式。本地登录时，用户的密码存储在%SystemRoot%\system32\config\sam这个文件里。当用户输入密码进行本地认证的过程中，所有的操作都是在本地进行的。他其实就是将用户输入的密码转换为NTLM Hash，然后与SAM中的NTLM Hash进行比较。而网络认证则是基于一种Challenge/Response认证机制的认证模式。他的认证过程我们下边会详细讲。</p>
 <p>Kerberos认证用于域环境中，它是一种基于票据（Ticket）的认证方式。他的整个认证过程涉及到三方：客户端、服务端和KDC（Key Distribution Center）。在Windows域环境中，由DC(域控)来作为KDC。</p>
-<p>Access Token(访问令牌)是用来描述进程或线程安全上下文的对象，令牌所包含的信息是与该用户账户相关的进程或线程的身份和权限信息。当用户登陆时，系统生成一个Access Token，然后以该用户身份运行的的所有进程都拥有该令牌的一个拷贝。这也就解释了A用户创建一个进程而B用户没有该进程的权限。</p>
+<p>Access Token(访问令牌)是用来描述进程或线程安全上下文的对象，令牌所包含的信息是与该用户账户相关的进程或线程的身份和权限信息。当用户登陆时，系统生成一个Access Token，然后以该用户身份运行的的所有进程都拥有该令牌的一个拷贝。这也就解释了A用户创建一个进程而B用户没有该进程的权限。<br><a id="more"></a></p>
 <h3 id="2-NTLM的认证过程是怎样什么？"><a href="#2-NTLM的认证过程是怎样什么？" class="headerlink" title="2. NTLM的认证过程是怎样什么？"></a>2. NTLM的认证过程是怎样什么？</h3><p>首先是本地认证，也就是NTLM Hash的生成方式。</p>
 <p>当用户注销、重启、锁屏后，操作系统会让winlogon显示登录界面，也就是输入框。当winlogon.exe接收输入后，将密码交给LSASS进程，这个进程中会存一份明文密码，将明文密码加密成NTLM Hash，对SAM数据库比较认证。(winlogon.exe即Windows Logon Process，是Windows NT用户登陆程序，用于管理用户登录和退出。<br>LSASS用于微软Windows系统的安全机制。它用于本地安全和登陆策略。)</p>
 <p>比如当用户输入密码123456后，那么操作系统会将123456转换为十六进制，经过Unicode转换后，再调用MD4加密算法加密，这个加密结果的十六进制就是NTLM Hash<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">123456 -&gt; hex(16进制编码) = 313233343536</span><br><span class="line">313233343536 -&gt; Unicode = 610064006d0069006e00</span><br><span class="line">610064006d0069006e00 -&gt; MD4 = 209c6174da490caeb422f3fa5a7ae634</span><br></pre></td></tr></table></figure></p>
@@ -514,19 +514,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">工具使用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">立志不倒的flags</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
              
               <li class="article-tag-list-item">
